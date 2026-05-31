@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard</title>
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="navbar">
+
+<h2>Student Management System</h2>
+
+<a href="/logout">Logout</a>
+
+</div>
+
+<div class="container">
+
+<div class="cards">
+
+<div class="card blue">
+<h3>Total Students</h3>
+<h2>{{ total_students }}</h2>
+</div>
+
+<div class="card green">
+<h3>Average Marks</h3>
+<h2>{{ avg_marks }}</h2>
+</div>
+
+<div class="card orange">
+<h3>Highest Marks</h3>
+<h2>{{ highest_marks }}</h2>
+</div>
+
+<div class="card red">
+<h3>Lowest Marks</h3>
+<h2>{{ lowest_marks }}</h2>
+</div>
+
+</div>
+
+<div class="table-header">
+
+<form method="GET">
+
+<input
+type="text"
+name="search"
+value="{{ search }}"
+placeholder="Search student..."
+class="search-box"
+>
+
+<button class="search-btn">
+Search
+</button>
+
+</form>
+
+<a href="/add_student"
+class="add-btn">
++ Add Student
+</a>
+
+</div>
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Course</th>
+<th>Attendance</th>
+<th>Marks</th>
+<th>Actions</th>
+</tr>
+
+{% for student in students %}
+
+<tr>
+<td>{{ student[0] }}</td>
+<td>{{ student[1] }}</td>
+<td>{{ student[2] }}</td>
+<td>{{ student[3] }}</td>
+<td>{{ student[4] }}</td>
+<td>{{ student[5] }}</td>
+
+<td>
+<a href="/edit_student/{{ student[0] }}">Edit</a>
+|
+<a href="/delete_student/{{ student[0] }}">Delete</a>
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>
